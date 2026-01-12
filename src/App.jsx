@@ -36,7 +36,7 @@ function App() {
   });
 
   // Settings - Speech Recognition using ElevenLabs API (key from .env)
-  const [useElevenLabs] = useState(true);
+  const [useElevenLabs, setUseElevenLabs] = useState(true);
   const elevenLabsApiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || '';
 
   // Current question
@@ -247,6 +247,26 @@ function App() {
 
         {/* Footer Info */}
         <footer className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          {/* Speech API Toggle */}
+          <div dir="ltr" className="mb-4 flex items-center justify-center gap-3">
+            <span className="text-xs">Web Speech</span>
+            <button
+              onClick={() => setUseElevenLabs(!useElevenLabs)}
+              className={`relative h-6 w-12 rounded-full transition-colors duration-200 ${
+                useElevenLabs ? 'bg-teal-500' : 'bg-gray-300 dark:bg-gray-600'
+              }`}
+            >
+              <span
+                className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-all duration-200 ${
+                  useElevenLabs ? 'right-1' : 'left-1'
+                }`}
+              />
+            </button>
+            <span className="text-xs">ElevenLabs</span>
+          </div>
+          <p className="mb-1 text-xs">
+            🔧 Speech: {useElevenLabs ? '🌐 ElevenLabs API' : '🖥️ Web Speech (Browser)'}
+          </p>
           <p>🎓 منصة تعليم اللغة العربية والقرآن الكريم</p>
           <p className="mt-1">
             تعرف على الكلام: {isSupported ? '✅ مدعوم' : '❌ غير مدعوم'}
